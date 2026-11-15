@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block page_name %}index{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Know where your money went before the month ends.</h1>
+  <p>Log expenses in seconds, set a monthly budget, and see which categories eat it up. Your data never leaves this browser: no cloud, no tracking.</p>
+  <div class="actions" data-show="guest" hidden>
+    <a class="btn primary" href="{{ url_for('register') }}">Create an account</a>
+    <a class="btn" href="{{ url_for('login') }}">Log in</a>
+  </div>
+  <div class="actions" data-show="auth" hidden>
+    <a class="btn primary" href="{{ url_for('dashboard') }}">Open dashboard</a>
+    <a class="btn" href="{{ url_for('expenses') }}">Add an expense</a>
+  </div>
+</section>
+<section class="grid3">
+  <div class="card"><h3>Log and edit</h3><p>Validated forms for amount, category, date and notes. Fix mistakes any time.</p></div>
+  <div class="card"><h3>Search and filter</h3><p>Find expenses by keyword, category or date range, and sort by amount or date.</p></div>
+  <div class="card"><h3>Budget and export</h3><p>Watch your monthly budget fill up and download any filtered list as CSV.</p></div>
+</section>
+<section class="card note-card">
+  <h3>Private by design</h3>
+  <p>Accounts, passwords (stored only as salted hashes) and expenses live in your browser's own storage. This works great for personal use on one device; it is not an online account system, so there is no password recovery and no sync between devices.</p>
+</section>
+{% endblock %}

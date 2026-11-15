@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SpendWise: a private expense tracker that keeps your data in your own browser.">
+  <title>{% block title %}SpendWise{% endblock %}</title>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="{% block body_class %}{% endblock %}" data-page="{% block page_name %}{% endblock %}" {% block body_attrs %}{% endblock %}>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('index') }}">Spend<span>Wise</span></a>
+  <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-nav">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="main-nav">
+    <a href="{{ url_for('dashboard') }}" data-show="auth" data-nav="dashboard" hidden>Dashboard</a>
+    <a href="{{ url_for('expenses') }}" data-show="auth" data-nav="expenses" hidden>Expenses</a>
+    <a href="{{ url_for('login') }}" data-show="guest" data-nav="login" hidden>Log in</a>
+    <a href="{{ url_for('register') }}" data-show="guest" data-nav="register" class="nav-cta" hidden>Create account</a>
+    <span class="user-chip" data-show="auth" hidden>
+      <span class="avatar" id="user-avatar" aria-hidden="true"></span>
+      <span id="user-name"></span>
+    </span>
+    <button type="button" class="btn small ghost-light" id="logout-btn" data-show="auth" hidden>Log out</button>
+  </nav>
+</header>
+<main class="container">
+  <noscript><div class="alert error">SpendWise needs JavaScript: your data is stored in your browser. Please enable it.</div></noscript>
+  {% block content %}{% endblock %}
+</main>
+<footer>SpendWise · your data stays in this browser and is never sent to the server</footer>
+<div id="toasts" class="toasts" aria-live="polite" aria-atomic="false"></div>
+<script defer src="{{ url_for('static', filename='js/auth.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/storage.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

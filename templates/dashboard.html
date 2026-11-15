@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · SpendWise{% endblock %}
+{% block page_name %}dashboard{% endblock %}
+{% block body_attrs %}data-protected{% endblock %}
+{% block content %}
+<div class="page-head"><h1>Dashboard</h1><span class="muted" id="month-label"></span></div>
+<div id="loading" class="loading" role="status">Loading your data…</div>
+<div id="dashboard-content" hidden>
+  <div id="budget-alert" class="alert error" role="alert" hidden></div>
+  <section class="grid4">
+    <div class="stat"><span>Spent this month</span><strong id="stat-month-total">–</strong></div>
+    <div class="stat"><span>Expenses this month</span><strong id="stat-month-count">–</strong></div>
+    <div class="stat"><span>Top category</span><strong id="stat-top">–</strong></div>
+    <div class="stat"><span>All-time total</span><strong id="stat-all">–</strong></div>
+  </section>
+
+  <section class="card">
+    <h2>Monthly budget</h2>
+    <div id="budget-empty" class="muted" hidden>No budget set yet. Set one to track how much of it you've used.</div>
+    <div id="budget-progress" hidden>
+      <div class="progress" role="progressbar" aria-label="Budget used" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div></div></div>
+      <p id="budget-text"></p>
+    </div>
+    <form id="budget-form" class="inline-form" novalidate>
+      <input type="number" id="budget-input" min="0" max="10000000" step="1" inputmode="numeric" placeholder="Monthly budget in ₹" aria-label="Monthly budget in rupees" required>
+      <button class="btn primary" type="submit">Save budget</button>
+    </form>
+    <p class="muted small-text">Enter 0 to clear the budget.</p>
+  </section>
+
+  <section class="grid2">
+    <div class="card">
+      <h2>This month by category</h2>
+      <div id="category-bars"></div>
+    </div>
+    <div class="card">
+      <h2>Last 6 months</h2>
+      <div class="columns" id="trend-chart" role="img" aria-label="Bar chart of total spending for each of the last six months"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="table-head"><h2>Recent expenses</h2><a href="{{ url_for('expenses') }}">View all</a></div>
+    <div id="recent-list"></div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script defer src="{{ url_for('static', filename='js/dashboard.js') }}"></script>{% endblock %}
